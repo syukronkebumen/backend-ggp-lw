@@ -35,7 +35,7 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="text-center">{{ $item->departement }}</td>
                                         <td class="align-middle text-center">
-                                            <button type="button" class="btn bg-gradient-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#modalEdits" wire:click="modalEdit({{$item->id}})">
+                                            <button type="button" class="btn bg-gradient-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#modalEdits" wire:click="clickEdit({{$item->id}})">
                                                 Edit
                                             </button>
                                             <button type="button" class="btn bg-gradient-danger btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#deleteModal" wire:click="hapusId({{$item->id}})">
@@ -111,7 +111,7 @@
     </div>
     @endif
     {{-- Modal Edit --}}
-    {{-- @if($modalDelete) --}}
+    @if($modalDelete)
     <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -131,5 +131,5 @@
             </div>
         </div>
     </div>
-    {{-- @endif --}}
+    @endif
 </main>

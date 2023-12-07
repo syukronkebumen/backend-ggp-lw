@@ -9,12 +9,14 @@ class Index extends Component
 {
     public $departement;
     public $id;
+    public $deleteId;
     public $modalAdd = true;
-    public $modalEdit = true;
+    public $modalEdit = false;
+    public $modalDelete = false;
 
     public function modalAdd(){
         $this->resetValidation();
-        $this->modalAdd = true;
+        // $this->modalAdd = true;
     }
 
     public function store()
@@ -34,14 +36,12 @@ class Index extends Component
         return redirect()->route('master-departement');
     }
 
-    public function modalEdit(int $id)
+    public function clickEdit($id)
     {   
-        dd($id);
         $this->id = $id;
         $this->modalEdit = true;
         $this->resetValidation();
         $data = MasterDepartementModel::find($id);
-        // dd($data);
         if($data){
             $this->departement = $data->departement;
         }else{
@@ -58,29 +58,42 @@ class Index extends Component
         $this->reset();
     }
 
-    // public function updateMasterMaterial(){
-    //     $this->validate([
-    //         'material_code'   => 'required',
-    //         'material_description' => 'required',
-    //         'uom' => 'required',
-    //         'batch' => 'required',
-    //         'plant' => 'required'
-    //     ]);
+    public function update(){
+        $this->validate([
+            'departement'   => 'required'
+        ]);
 
-    //     MasterMaterialModel::where('id', $this->id)->update([
-    //         'material_code'     => $this->material_code,
-    //         'material_description'   => $this->material_description,
-    //         'uom'   => $this->uom,
-    //         'batch'   => $this->batch,
-    //         'plant'   => $this->plant
-    //     ]);
+        MasterDepartementModel::where('id', $this->id)->update([
+            'departement'     => $this->departement
+        ]);
 
-    //     // //flash message
-    //     session()->flash('message', 'Data Berhasil Disimpan.');
+        // //flash message
+        session()->flash('message', 'Data Berhasil Disimpan.');
 
-    //     // //redirect
-    //     return redirect()->route('master-material');
-    // }
+        // //redirect
+        return redirect()->route('master-departement');
+    }
+
+    public function hapusId($id)
+    {
+        $this->modalDelete = true;
+        $this->deleteId = $id;
+    }
+
+    public function delete()
+    {
+        $delete = MasterDepartementModel::find($this->deleteId);
+
+        if($delete) {
+            $delete->delete();
+        }
+
+        //flash message
+        session()->flash('message', 'Data Berhasil Dihapus.');
+
+        //redirect
+        return redirect()->route('master-departement');
+    }
 
     public function render()
     {
