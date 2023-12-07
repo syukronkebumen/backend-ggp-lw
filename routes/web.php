@@ -14,6 +14,7 @@ use App\Http\Livewire\Master\MasterMovementType;
 use App\Http\Livewire\Master\MasterStorageBin;
 use App\Http\Livewire\Master\MasterStorageLocation;
 use App\Http\Livewire\MasterDepartement\Index as MasterDepartementIndex;
+use App\Http\Livewire\MasterUom\Index as MasterUomIndex;
 use App\Http\Livewire\MasterMaterial\Edit;
 use App\Http\Livewire\MasterMaterial\Index;
 use App\Http\Livewire\Profile;
@@ -68,6 +69,7 @@ Route::middleware('auth')->group(function () {
     // Master
     Route::get('/master_material', Index::class)->name('master-material');
     Route::get('/master_departement', MasterDepartementIndex::class)->name('master-departement');
+    Route::get('/master_uom', MasterUomIndex::class)->name('master-uom');
 
     Route::get('/master_storage_bin', MasterStorageBin::class)->name('master-storage-bin');
     Route::get('/master_storage_location', MasterStorageLocation::class)->name('master-storage-location');

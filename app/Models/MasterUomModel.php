@@ -11,6 +11,6 @@ class MasterUomModel extends Model
 
     protected $table = 'master_uom';
     protected $fillable = [
-        'departement'
+        'name'
     ];
 }
